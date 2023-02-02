@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+a:link
+{
+    color: black;
+    text-decoration: none;
+}
+a[name]:hover
+{
+    text-decoration: none;
+}
+a:hover
+{
+    color: blue;
+    text-decoration: underline;
+}
+a:visited
+{
+    color: black;
+    text-decoration: none;
+}
+.heading
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+}
+.heading:hover
+{
+    color: black;
+    font-weight: bold;
+    font-size: 110%;
+    text-decoration: none;
+}
+</style>
+
+<body style="font-family:'Courier New'; font-size:14px;">
+<p class="heading">
+Mplus VERSION 8.8<br />
+MUTHEN & MUTHEN<br />
+02/02/2023   5:05 PM<br />
+</p>
+
+<p class='heading'>OUTPUT SECTIONS</p>
+
+<ul>
+     <li><a href='#input'>Input Instructions</a></li>
+     <li><a href='#inputmessages'>Input Warnings And Errors</a></li>
+     <li><a href='#summary_analysis'>Summary Of Analysis</a></li>
+     <li><a href='#summary_data'>Summary Of Data For The First Data Set</a></li>
+     <li><a href='#summary_missing_patterns'>Summary Of Missing Data Patterns For The First Data Set</a></li>
+     <li><a href='#covariance_coverage'>Covariance Coverage Of Data For The First Data Set</a></li>
+     <li><a href='#catprops'>Univariate Proportions For Categorical Variables</a></li>
+     <li><a href='#samplestats'>Sample Statistics</a></li>
+     <li><a href='#model_fit'>Model Fit Information</a></li>
+     <li><a href='#model_results'>Model Results</a></li>
+     <li><a href='#standardized_results'>Standardized Model Results</a></li>
+     <li><a href='#rsquare'>R-square</a></li>
+     <li><a href='#indirect_results'>Total, Total Indirect, Specific Indirect, And Direct Effects</a></li>
+     <li><a href='#ci_results'>Confidence Intervals Of Model Results</a></li>
+     <li><a href='#ci_stand_results'>Confidence Intervals Of Standardized Model Results</a></li>
+     <li><a href='#ci_indirect'>Confidence Intervals Of Total, Total Indirect, Specific Indirect, And Direct Effects</a></li>
+     <li><a href='#tech1_output'>Technical 1 Output</a></li>
+</ul>
+<pre>
+
+<a name='input' class='heading'>INPUT INSTRUCTIONS</a>
+
+  Title:
+  Figure S1.3
+
+  Data:
+    FILE IS mi_dataset_MPLUS_implist.dat;
+    TYPE = IMPUTATION;
+
+  Variable:
+    Names are
+       ADHD1 ADHD2 ADHD3 T1_SPF_class T1_SPF_teach T1_famfunc T2_SPF_class
+       T2_SPF_teach T2_famfunc T2_ladder_4cat T3_SPF_class T3_SPF_teach T3_famfunc
+       T3_ladder_4cat T4_ladder_4cat district_4cat ethni_bin g1ageyrc g1sex
+       g1wiscdq g2ageyrc g3ageyrc idno p1referred_12mo p1ses p2referred_6mo
+       p3referred_6mo t1_psychostimulants t2_psychostimulants t3_psychostimulants;
+    Missing are all (-9999) ;
+
+  Usevariables are    T3_ladder_4cat
+                      T4_ladder_4cat
+                      T3_famfunc
+                      ADHD3
+                      g3ageyrc g1sex ethni_bin p1ses g1wiscdq;
+
+  Categorical is     T4_ladder_4cat;
+
+  Model:
+
+  ! outcome regression
+  T4_ladder_4cat ON T3_famfunc ADHD3 T3_ladder_4cat
+              g3ageyrc g1sex ethni_bin p1ses g1wiscdq;
+
+  ! mediator regression
+  T3_famfunc ON ADHD3
+              g3ageyrc g1sex ethni_bin p1ses g1wiscdq;
+
+
+
+  T3_ladder_4cat WITH T3_famfunc ADHD3;
+
+  ADHD3 ON g3ageyrc g1sex ethni_bin p1ses g1wiscdq;
+  T3_ladder_4cat ON g3ageyrc g1sex ethni_bin p1ses g1wiscdq;
+
+
+  Model indirect:
+  T4_ladder_4cat IND ADHD3;
+
+
+  Analysis:
+    Estimator = WLSMV;
+    Parameterization = theta;
+    process = 23;
+    conv=0.00001;
+
+  Output:
+  sampstat standardized(stdyx) cinterval ;
+
+
+
+<a name='inputmessages' class='heading'></a>
+
+*** WARNING in VARIABLE command
+  Note that only the first 8 characters of variable names are used in the output.
+  Shorten variable names to avoid any confusion.
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+Figure S1.3
+
+<a name='summary_analysis' class='heading'>SUMMARY OF ANALYSIS</a>
+
+Number of groups                                                 1
+Average number of observations                                2229
+
+Number of replications
+    Requested                                                   90
+    Completed                                                   90
+
+Number of dependent variables                                    4
+Number of independent variables                                  5
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   T3_LADDER_  T3_FAMFUNC  ADHD3
+
+  Binary and ordered categorical (ordinal)
+   T4_LADDE
+
+Observed independent variables
+   G3AGEYRC    G1SEX       ETHNI_BI    P1SES       G1WISCDQ
+
+
+Estimator                                                    WLSMV
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.100D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Parameterization                                             THETA
+Link                                                        PROBIT
+
+Input data file(s)
+  Multiple data files from
+    mi_dataset_MPLUS_implist.dat
+
+Input data format  FREE
+
+
+<a name='summary_data' class='heading'>SUMMARY OF DATA FOR THE FIRST DATA SET</a>
+
+     Number of missing data patterns             1
+
+
+<a name='summary_missing_patterns' class='heading'>SUMMARY OF MISSING DATA PATTERNS FOR THE FIRST DATA SET</a>
+
+
+     MISSING DATA PATTERNS (x = not missing)
+
+           1
+ T3_LADDE  x
+ T4_LADDE  x
+ T3_FAMFU  x
+ ADHD3     x
+
+
+     MISSING DATA PATTERN FREQUENCIES
+
+    Pattern   Frequency
+          1        2229
+
+
+<a name='covariance_coverage' class='heading'>COVARIANCE COVERAGE OF DATA FOR THE FIRST DATA SET</a>
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+ T3_LADDE       1.000
+ T4_LADDE       1.000         1.000
+ T3_FAMFU       1.000         1.000         1.000
+ ADHD3          1.000         1.000         1.000         1.000
+
+
+<a name='catprops' class='heading'>UNIVARIATE PROPORTIONS FOR CATEGORICAL VARIABLES</a>
+
+NOTE:  These are average results over 90 data sets.
+
+    T4_LADDE
+      Category 1    0.169
+      Category 2    0.376
+      Category 3    0.267
+      Category 4    0.188
+
+
+<a name='samplestats' class='heading'>SAMPLE STATISTICS</a>
+
+NOTE:  These are average results over 90 data sets.
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means/Intercepts/Thresholds
+              T3_LADDE      T4_LADDE      T4_LADDE      T4_LADDE      T3_FAMFU
+              ________      ________      ________      ________      ________
+               -2.567         3.531         5.057         6.175         4.158
+
+
+           Means/Intercepts/Thresholds
+              ADHD3
+              ________
+                0.807
+
+
+           Slopes
+              G3AGEYRC      G1SEX         ETHNI_BI      P1SES         G1WISCDQ
+              ________      ________      ________      ________      ________
+ T3_LADDE       0.094        -0.209         0.182         0.453         0.036
+ T4_LADDE       0.031        -0.247         0.390         0.658         0.046
+ T3_FAMFU      -0.044         0.023        -0.042         0.065        -0.001
+ ADHD3         -0.005         0.035        -0.018        -0.025        -0.002
+
+
+           Covariances/Correlations/Residual Correlations
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+ T3_LADDE       0.676
+ T4_LADDE       0.794
+ T3_FAMFU       0.043         0.067         0.158
+ ADHD3         -0.192        -0.288        -0.177         0.098
+
+
+<a name='model_fit' class='heading'>MODEL FIT INFORMATION</a>
+
+Number of Free Parameters                       35
+
+Chi-Square Test of Model Fit
+
+        Degrees of freedom                       0
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations       90
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000            0.000          0.000
+           0.980       1.000            0.000          0.000
+           0.950       1.000            0.000          0.000
+           0.900       1.000            0.000          0.000
+           0.800       1.000            0.000          0.000
+           0.700       1.000            0.000          0.000
+           0.500       1.000            0.000          0.000
+           0.300       1.000            0.000          0.000
+           0.200       1.000            0.000          0.000
+           0.100       1.000            0.000          0.000
+           0.050       1.000            0.000          0.000
+           0.020       1.000            0.000          0.000
+           0.010       1.000            0.000          0.000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations       90
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       1.000
+           0.980       1.000
+           0.950       1.000
+           0.900       1.000
+           0.800       1.000
+           0.700       1.000
+           0.500       1.000
+           0.300       1.000
+           0.200       1.000
+           0.100       1.000
+           0.050       1.000
+           0.020       1.000
+           0.010       1.000
+
+CFI/TLI
+
+    CFI
+
+        Mean                                 1.000
+        Std Dev                              0.000
+        Number of successful computations       90
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       0.000
+           0.980       0.000
+           0.950       0.000
+           0.900       0.000
+           0.800       0.000
+           0.700       0.000
+           0.500       0.000
+           0.300       0.000
+           0.200       0.000
+           0.100       0.000
+           0.050       0.000
+           0.020       0.000
+           0.010       0.000
+
+    TLI
+
+        Mean                                 1.000
+        Std Dev                              0.000
+        Number of successful computations       90
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       0.000
+           0.980       0.000
+           0.950       0.000
+           0.900       0.000
+           0.800       0.000
+           0.700       0.000
+           0.500       0.000
+           0.300       0.000
+           0.200       0.000
+           0.100       0.000
+           0.050       0.000
+           0.020       0.000
+           0.010       0.000
+
+SRMR (Standardized Root Mean Square Residual)
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations       90
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       1.000
+           0.980       1.000
+           0.950       1.000
+           0.900       1.000
+           0.800       1.000
+           0.700       1.000
+           0.500       1.000
+           0.300       1.000
+           0.200       1.000
+           0.100       1.000
+           0.050       1.000
+           0.020       1.000
+           0.010       1.000
+
+
+<a name='model_results' class='heading'>MODEL RESULTS</a>
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+ T4_LADDE ON
+    T3_FAMFUNC         0.039      0.098      0.402      0.688      0.582
+    ADHD3             -0.752      0.128     -5.881      0.000      0.610
+    T3_LADDER_         1.578      0.057     27.879      0.000      0.535
+    G3AGEYRC          -0.098      0.054     -1.822      0.068      0.476
+    G1SEX             -0.062      0.072     -0.859      0.390      0.441
+    ETHNI_BIN          0.360      0.119      3.014      0.003      0.552
+    P1SES              0.375      0.054      6.951      0.000      0.508
+    G1WISCDQ           0.020      0.003      6.598      0.000      0.467
+
+ T3_FAMFU ON
+    ADHD3             -0.225      0.033     -6.732      0.000      0.369
+    G3AGEYRC          -0.045      0.014     -3.125      0.002      0.332
+    G1SEX              0.031      0.019      1.592      0.111      0.236
+    ETHNI_BIN         -0.046      0.032     -1.447      0.148      0.446
+    P1SES              0.059      0.013      4.432      0.000      0.289
+    G1WISCDQ          -0.002      0.001     -2.434      0.015      0.276
+
+ ADHD3    ON
+    G3AGEYRC          -0.005      0.011     -0.444      0.657      0.354
+    G1SEX              0.035      0.016      2.228      0.026      0.268
+    ETHNI_BIN         -0.018      0.024     -0.744      0.457      0.305
+    P1SES             -0.025      0.011     -2.347      0.019      0.248
+    G1WISCDQ          -0.002      0.001     -3.700      0.000      0.262
+
+ T3_LADDE ON
+    G3AGEYRC           0.094      0.029      3.198      0.001      0.254
+    G1SEX             -0.209      0.038     -5.483      0.000      0.153
+    ETHNI_BIN          0.182      0.061      2.966      0.003      0.258
+    P1SES              0.453      0.028     16.481      0.000      0.174
+    G1WISCDQ           0.036      0.002     23.262      0.000      0.125
+
+ T3_LADDE WITH
+    T3_FAMFUNC         0.003      0.008      0.377      0.706      0.349
+    ADHD3             -0.049      0.007     -7.575      0.000      0.310
+
+ Intercepts
+    T3_LADDER_        -2.567      0.507     -5.058      0.000      0.218
+    T3_FAMFUNC         4.340      0.250     17.391      0.000      0.328
+    ADHD3              0.807      0.193      4.174      0.000      0.338
+
+ Thresholds
+    T4_LADDE$1         1.478      0.992      1.490      0.136      0.465
+    T4_LADDE$2         4.062      0.994      4.086      0.000      0.474
+    T4_LADDE$3         5.950      0.999      5.958      0.000      0.473
+
+ Residual Variances
+    T3_LADDER_         0.676      0.026     26.490      0.000      0.127
+    T3_FAMFUNC         0.153      0.006     26.968      0.000      0.246
+    ADHD3              0.098      0.003     28.236      0.000      0.273
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.107E-06
+       (ratio of smallest to largest eigenvalue)
+
+
+<a name='standardized_results' class='heading'>STANDARDIZED MODEL RESULTS</a>
+
+
+STDYX Standardization
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+ T4_LADDE ON
+    T3_FAMFUNC         0.007      0.016      0.403      0.687      0.580
+    ADHD3             -0.099      0.016     -6.131      0.000      0.588
+    T3_LADDER_         0.729      0.018     40.406      0.000      0.480
+    G3AGEYRC          -0.029      0.016     -1.825      0.068      0.476
+    G1SEX             -0.013      0.015     -0.858      0.391      0.440
+    ETHNI_BIN          0.051      0.017      3.018      0.003      0.552
+    P1SES              0.125      0.018      7.056      0.000      0.490
+    G1WISCDQ           0.126      0.019      6.701      0.000      0.450
+
+ T3_FAMFU ON
+    ADHD3             -0.176      0.026     -6.853      0.000      0.371
+    G3AGEYRC          -0.080      0.025     -3.141      0.002      0.332
+    G1SEX              0.038      0.024      1.593      0.111      0.237
+    ETHNI_BIN         -0.039      0.027     -1.449      0.147      0.444
+    P1SES              0.117      0.026      4.471      0.000      0.289
+    G1WISCDQ          -0.063      0.026     -2.437      0.015      0.275
+
+ ADHD3    ON
+    G3AGEYRC          -0.011      0.025     -0.444      0.657      0.353
+    G1SEX              0.055      0.025      2.230      0.026      0.264
+    ETHNI_BIN         -0.019      0.026     -0.744      0.457      0.305
+    P1SES             -0.064      0.027     -2.356      0.018      0.245
+    G1WISCDQ          -0.104      0.028     -3.717      0.000      0.261
+
+ T3_LADDE ON
+    G3AGEYRC           0.061      0.019      3.202      0.001      0.260
+    G1SEX             -0.094      0.017     -5.500      0.000      0.151
+    ETHNI_BIN          0.056      0.019      2.975      0.003      0.261
+    P1SES              0.327      0.018     18.146      0.000      0.205
+    G1WISCDQ           0.484      0.017     28.209      0.000      0.148
+
+ T3_LADDE WITH
+    T3_FAMFUNC         0.010      0.025      0.376      0.707      0.350
+    ADHD3             -0.192      0.024     -7.997      0.000      0.329
+
+ Intercepts
+    T3_LADDER_        -2.309      0.447     -5.170      0.000      0.231
+    T3_FAMFUNC        10.783      0.626     17.238      0.000      0.335
+    ADHD3              2.554      0.613      4.169      0.000      0.339
+
+ Thresholds
+    T4_LADDE$1         0.615      0.413      1.488      0.137      0.465
+    T4_LADDE$2         1.689      0.414      4.079      0.000      0.470
+    T4_LADDE$3         2.474      0.416      5.950      0.000      0.467
+
+ Residual Variances
+    T3_LADDER_         0.547      0.017     31.430      0.000      0.141
+    T3_FAMFUNC         0.944      0.012     79.366      0.000      0.374
+    ADHD3              0.977      0.008    127.407      0.000      0.299
+
+
+<a name='rsquare' class='heading'>R-SQUARE</a>
+
+    Observed                                        Two-Tailed   Rate of
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+    T3_LADDE           0.453      0.017     26.021      0.000      0.141
+    T4_LADDE           0.827      0.010     81.068      0.000      0.427
+    T3_FAMFU           0.056      0.012      4.667      0.000      0.374
+    ADHD3              0.023      0.008      2.940      0.003      0.299
+
+
+<a name='indirect_results' class='heading'>TOTAL, TOTAL INDIRECT, SPECIFIC INDIRECT, AND DIRECT EFFECTS</a>
+
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+Effects from ADHD3 to T4_LADDE
+
+  Total               -0.761      0.123     -6.175      0.000      0.592
+  Total indirect      -0.009      0.022     -0.399      0.690      0.572
+
+  Specific indirect 1
+    T4_LADDE
+    T3_FAMFU
+    ADHD3             -0.009      0.022     -0.399      0.690      0.572
+
+  Direct
+    T4_LADDE
+    ADHD3             -0.752      0.128     -5.881      0.000      0.610
+
+
+
+STANDARDIZED TOTAL, TOTAL INDIRECT, SPECIFIC INDIRECT, AND DIRECT EFFECTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+Effects from ADHD3 to T4_LADDE
+
+  Total               -0.100      0.015     -6.460      0.000      0.566
+  Total indirect      -0.001      0.003     -0.401      0.689      0.571
+
+  Specific indirect 1
+    T4_LADDE
+    T3_FAMFU
+    ADHD3             -0.001      0.003     -0.401      0.689      0.571
+
+  Direct
+    T4_LADDE
+    ADHD3             -0.099      0.016     -6.131      0.000      0.588
+
+
+
+
+<a name='ci_results' class='heading'>CONFIDENCE INTERVALS OF MODEL RESULTS</a>
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ T4_LADDE ON
+    T3_FAMFUNC      -0.213      -0.152      -0.122       0.039       0.200       0.231       0.291
+    ADHD3           -1.081      -1.003      -0.962      -0.752      -0.542      -0.501      -0.423
+    T3_LADDER_       1.432       1.467       1.485       1.578       1.671       1.689       1.724
+    G3AGEYRC        -0.236      -0.203      -0.186      -0.098      -0.010       0.007       0.041
+    G1SEX           -0.249      -0.204      -0.181      -0.062       0.057       0.080       0.124
+    ETHNI_BIN        0.052       0.126       0.164       0.360       0.557       0.594       0.668
+    P1SES            0.236       0.270       0.287       0.375       0.464       0.481       0.515
+    G1WISCDQ         0.012       0.014       0.015       0.020       0.025       0.026       0.028
+
+ T3_FAMFU ON
+    ADHD3           -0.311      -0.290      -0.280      -0.225      -0.170      -0.159      -0.139
+    G3AGEYRC        -0.081      -0.073      -0.068      -0.045      -0.021      -0.017      -0.008
+    G1SEX           -0.019      -0.007      -0.001       0.031       0.062       0.068       0.080
+    ETHNI_BIN       -0.128      -0.108      -0.098      -0.046       0.006       0.016       0.036
+    P1SES            0.025       0.033       0.037       0.059       0.081       0.085       0.093
+    G1WISCDQ        -0.004      -0.003      -0.003      -0.002      -0.001       0.000       0.000
+
+ ADHD3    ON
+    G3AGEYRC        -0.034      -0.027      -0.023      -0.005       0.013       0.017       0.024
+    G1SEX           -0.005       0.004       0.009       0.035       0.061       0.066       0.076
+    ETHNI_BIN       -0.079      -0.065      -0.057      -0.018       0.022       0.029       0.044
+    P1SES           -0.053      -0.046      -0.043      -0.025      -0.008      -0.004       0.002
+    G1WISCDQ        -0.004      -0.003      -0.003      -0.002      -0.001      -0.001      -0.001
+
+ T3_LADDE ON
+    G3AGEYRC         0.018       0.036       0.046       0.094       0.142       0.151       0.169
+    G1SEX           -0.307      -0.284      -0.272      -0.209      -0.146      -0.134      -0.111
+    ETHNI_BIN        0.024       0.062       0.081       0.182       0.283       0.302       0.340
+    P1SES            0.383       0.399       0.408       0.453       0.499       0.507       0.524
+    G1WISCDQ         0.032       0.033       0.033       0.036       0.038       0.039       0.040
+
+ T3_LADDE WITH
+    T3_FAMFUNC      -0.018      -0.013      -0.010       0.003       0.016       0.019       0.024
+    ADHD3           -0.066      -0.062      -0.060      -0.049      -0.039      -0.037      -0.033
+
+ Intercepts
+    T3_LADDE        -3.874      -3.561      -3.401      -2.567      -1.732      -1.572      -1.260
+    T3_FAMFU         3.697       3.850       3.929       4.340       4.750       4.829       4.982
+    ADHD3            0.309       0.428       0.489       0.807       1.125       1.186       1.305
+
+ Thresholds
+    T4_LADDE        -1.076      -0.466      -0.153       1.478       3.110       3.422       4.033
+    T4_LADDE         1.501       2.113       2.426       4.062       5.697       6.010       6.622
+    T4_LADDE         3.378       3.993       4.307       5.950       7.593       7.908       8.523
+
+ Residual Variances
+    T3_LADDE         0.611       0.626       0.634       0.676       0.718       0.726       0.742
+    T3_FAMFU         0.138       0.142       0.144       0.153       0.162       0.164       0.168
+    ADHD3            0.089       0.091       0.092       0.098       0.103       0.104       0.106
+
+
+<a name='ci_stand_results' class='heading'>CONFIDENCE INTERVALS OF STANDARDIZED MODEL RESULTS</a>
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+ T4_LADDE ON
+    T3_FAMFUNC      -0.035      -0.025      -0.020       0.007       0.033       0.039       0.049
+    ADHD3           -0.140      -0.130      -0.125      -0.099      -0.072      -0.067      -0.057
+    T3_LADDER_       0.683       0.694       0.700       0.729       0.759       0.765       0.776
+    G3AGEYRC        -0.071      -0.061      -0.056      -0.029      -0.003       0.002       0.012
+    G1SEX           -0.052      -0.042      -0.038      -0.013       0.012       0.017       0.026
+    ETHNI_BIN        0.007       0.018       0.023       0.051       0.079       0.084       0.095
+    P1SES            0.079       0.090       0.096       0.125       0.154       0.160       0.171
+    G1WISCDQ         0.078       0.089       0.095       0.126       0.157       0.163       0.175
+
+ T3_FAMFU ON
+    ADHD3           -0.243      -0.227      -0.219      -0.176      -0.134      -0.126      -0.110
+    G3AGEYRC        -0.145      -0.130      -0.122      -0.080      -0.038      -0.030      -0.014
+    G1SEX           -0.023      -0.009      -0.001       0.038       0.077       0.085       0.099
+    ETHNI_BIN       -0.108      -0.092      -0.083      -0.039       0.005       0.014       0.030
+    P1SES            0.050       0.066       0.074       0.117       0.160       0.169       0.185
+    G1WISCDQ        -0.131      -0.115      -0.106      -0.063      -0.021      -0.012       0.004
+
+ ADHD3    ON
+    G3AGEYRC        -0.077      -0.061      -0.053      -0.011       0.030       0.038       0.054
+    G1SEX           -0.009       0.007       0.015       0.055       0.096       0.104       0.119
+    ETHNI_BIN       -0.086      -0.070      -0.062      -0.019       0.023       0.031       0.047
+    P1SES           -0.133      -0.117      -0.108      -0.064      -0.019      -0.011       0.006
+    G1WISCDQ        -0.175      -0.158      -0.149      -0.104      -0.058      -0.049      -0.032
+
+ T3_LADDE ON
+    G3AGEYRC         0.012       0.024       0.030       0.061       0.092       0.098       0.110
+    G1SEX           -0.138      -0.127      -0.122      -0.094      -0.066      -0.060      -0.050
+    ETHNI_BIN        0.007       0.019       0.025       0.056       0.087       0.093       0.104
+    P1SES            0.280       0.291       0.297       0.327       0.356       0.362       0.373
+    G1WISCDQ         0.440       0.450       0.456       0.484       0.512       0.517       0.528
+
+ T3_LADDE WITH
+    T3_FAMFUNC      -0.056      -0.040      -0.032       0.010       0.051       0.059       0.075
+    ADHD3           -0.254      -0.239      -0.232      -0.192      -0.153      -0.145      -0.130
+
+ Intercepts
+    T3_LADDE        -3.459      -3.184      -3.043      -2.309      -1.574      -1.433      -1.158
+    T3_FAMFU         9.172       9.557       9.754      10.783      11.812      12.009      12.394
+    ADHD3            0.976       1.353       1.546       2.554       3.562       3.755       4.133
+
+ Thresholds
+    T4_LADDE        -0.449      -0.195      -0.065       0.615       1.294       1.424       1.679
+    T4_LADDE         0.622       0.877       1.008       1.689       2.370       2.500       2.755
+    T4_LADDE         1.403       1.659       1.790       2.474       3.158       3.289       3.545
+
+ Residual Variances
+    T3_LADDE         0.502       0.513       0.518       0.547       0.576       0.581       0.592
+    T3_FAMFU         0.914       0.921       0.925       0.944       0.964       0.968       0.975
+    ADHD3            0.958       0.962       0.965       0.977       0.990       0.992       0.997
+
+
+<a name='ci_indirect' class='heading'>CONFIDENCE INTERVALS OF TOTAL, TOTAL INDIRECT, SPECIFIC INDIRECT, AND DIRECT EFFECTS</a>
+
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Effects from ADHD3 to T4_LADDE
+
+  Total             -1.078      -1.002      -0.963      -0.761      -0.558      -0.519      -0.443
+  Total indirect    -0.066      -0.052      -0.045      -0.009       0.028       0.034       0.048
+
+  Specific indirect 1
+    T4_LADDE
+    T3_FAMFU
+    ADHD3           -0.066      -0.052      -0.045      -0.009       0.028       0.034       0.048
+
+  Direct
+    T4_LADDE
+    ADHD3           -1.081      -1.003      -0.962      -0.752      -0.542      -0.501      -0.423
+
+
+
+CONFIDENCE INTERVALS OF STANDARDIZED TOTAL, TOTAL INDIRECT, SPECIFIC INDIRECT, AND DIRECT EFFECTS
+
+
+STDYX Standardization
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Effects from ADHD3 to T4_LADDE
+
+  Total             -0.140      -0.130      -0.125      -0.100      -0.074      -0.070      -0.060
+  Total indirect    -0.009      -0.007      -0.006      -0.001       0.004       0.005       0.006
+
+  Specific indirect 1
+    T4_LADDE
+    T3_FAMFU
+    ADHD3           -0.009      -0.007      -0.006      -0.001       0.004       0.005       0.006
+
+  Direct
+    T4_LADDE
+    ADHD3           -0.140      -0.130      -0.125      -0.099      -0.072      -0.067      -0.057
+
+
+
+
+<a name='tech1_output' class='heading'>TECHNICAL 1 OUTPUT</a>
+
+
+     PARAMETER SPECIFICATION
+
+
+           TAU
+              T4_LADDE      T4_LADDE      T4_LADDE
+              ________      ________      ________
+                  1             2             3
+
+
+           NU
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+                  0             0             0             0
+
+
+           LAMBDA
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+ T3_LADDE           0             0             0             0
+ T4_LADDE           0             0             0             0
+ T3_FAMFU           0             0             0             0
+ ADHD3              0             0             0             0
+
+
+           THETA
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+ T3_LADDE           0
+ T4_LADDE           0             0
+ T3_FAMFU           0             0             0
+ ADHD3              0             0             0             0
+
+
+           ALPHA
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+                  4             0             5             6
+
+
+           BETA
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+ T3_LADDE           0             0             0             0
+ T4_LADDE           7             0             8             9
+ T3_FAMFU           0             0             0            10
+ ADHD3              0             0             0             0
+
+
+           GAMMA
+              G3AGEYRC      G1SEX         ETHNI_BI      P1SES         G1WISCDQ
+              ________      ________      ________      ________      ________
+ T3_LADDE          11            12            13            14            15
+ T4_LADDE          16            17            18            19            20
+ T3_FAMFU          21            22            23            24            25
+ ADHD3             26            27            28            29            30
+
+
+           PSI
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+ T3_LADDE          31
+ T4_LADDE           0             0
+ T3_FAMFU          32             0            33
+ ADHD3             34             0             0            35
+
+
+     STARTING VALUES
+
+
+           TAU
+              T4_LADDE      T4_LADDE      T4_LADDE
+              ________      ________      ________
+               -1.011         0.105         0.894
+
+
+           NU
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+                0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+ T3_LADDE       1.000         0.000         0.000         0.000
+ T4_LADDE       0.000         1.000         0.000         0.000
+ T3_FAMFU       0.000         0.000         1.000         0.000
+ ADHD3          0.000         0.000         0.000         1.000
+
+
+           THETA
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+ T3_LADDE       0.000
+ T4_LADDE       0.000         0.000
+ T3_FAMFU       0.000         0.000         0.000
+ ADHD3          0.000         0.000         0.000         0.000
+
+
+           ALPHA
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+                2.350         0.000         3.334         0.526
+
+
+           BETA
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+ T3_LADDE       0.000         0.000         0.000         0.000
+ T4_LADDE       0.000         0.000         0.000         0.000
+ T3_FAMFU       0.000         0.000         0.000         0.000
+ ADHD3          0.000         0.000         0.000         0.000
+
+
+           GAMMA
+              G3AGEYRC      G1SEX         ETHNI_BI      P1SES         G1WISCDQ
+              ________      ________      ________      ________      ________
+ T3_LADDE       0.000         0.000         0.000         0.000         0.000
+ T4_LADDE       0.000         0.000         0.000         0.000         0.000
+ T3_FAMFU       0.000         0.000         0.000         0.000         0.000
+ ADHD3          0.000         0.000         0.000         0.000         0.000
+
+
+           PSI
+              T3_LADDE      T4_LADDE      T3_FAMFU      ADHD3
+              ________      ________      ________      ________
+ T3_LADDE       0.610
+ T4_LADDE       0.000         1.000
+ T3_FAMFU       0.000         0.000         0.080
+ ADHD3          0.000         0.000         0.000         0.051
+
+
+DIAGRAM INFORMATION
+
+  Use View Diagram under the Diagram menu in the Mplus Editor to view the diagram.
+  If running Mplus from the Mplus Diagrammer, the diagram opens automatically.
+
+  Diagram output
+    d:\onedrive - universiteit utrecht\trails buffer paper\submission rcap\revision 1\final analyses\edited data\mplus\f
+
+     Beginning Time:  17:05:45
+        Ending Time:  17:05:55
+       Elapsed Time:  00:00:10
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2022 Muthen & Muthen
+</pre>
+</body>
+</html>
